@@ -1,22 +1,38 @@
 package project01;
 
+import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 
-public class Ticket {
+public class Ticket implements Serializable{
 
 	private int ticketID;
 	private double amount;
 	private Date submitted;
 	private Date resolved;
-	private String descrption;
-	private Blob reciept;
-	private String author;
-	private String resolver;
+	private String description;
+	//private Blob reciept;
+	private int author;
+	private int resolver;
 	private int statusID;
 	private int typeID;	
 
 	public Ticket() {}
+	
+	public Ticket(int ticketID, double amount, Date submitted, Date resolved, String description,
+			int author, int resolver, int statusID, int typeID) {
+		super();
+		this.ticketID = ticketID;
+		this.amount = amount;
+		this.submitted = submitted;
+		this.resolved = resolved;
+		this.description = description;
+		//this.reciept = null;
+		this.author = author;
+		this.resolver = resolver;
+		this.statusID = statusID;
+		this.typeID = typeID;
+	}
 
 	public int getTicketID() {
 		return ticketID;
@@ -50,35 +66,35 @@ public class Ticket {
 		this.resolved = resolved;
 	}
 
-	public String getDescrption() {
-		return descrption;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescrption(String descrption) {
-		this.descrption = descrption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+//
+//	public Blob getReciept() {
+//		return reciept;
+//	}
+//
+//	public void setReciept(Blob reciept) {
+//		this.reciept = reciept;
+//	}
 
-	public Blob getReciept() {
-		return reciept;
-	}
-
-	public void setReciept(Blob reciept) {
-		this.reciept = reciept;
-	}
-
-	public String getAuthor() {
+	public int getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(int author) {
 		this.author = author;
 	}
 
-	public String getResolver() {
+	public int getResolver() {
 		return resolver;
 	}
 
-	public void setResolver(String resolver) {
+	public void setResolver(int resolver) {
 		this.resolver = resolver;
 	}
 

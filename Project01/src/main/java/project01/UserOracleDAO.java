@@ -120,10 +120,10 @@ public class UserOracleDAO implements UserDAO {
 			prepStmt.setDouble(2, t.getAmount());
 			prepStmt.setDate(3, t.getSubmitted());
 			prepStmt.setDate(4, null);
-			prepStmt.setString(5, t.getDescrption());
-			prepStmt.setBlob(6, t.getReciept());
-			prepStmt.setString(7, t.getAuthor());
-			prepStmt.setString(8, t.getResolver());
+			prepStmt.setString(5, t.getDescription());
+			prepStmt.setString(6, null);
+			prepStmt.setInt(7, t.getAuthor());
+			prepStmt.setInt(8, t.getResolver());
 			prepStmt.setInt(9, t.getStatusID());
 			prepStmt.setInt(10, t.getTypeID());
 			

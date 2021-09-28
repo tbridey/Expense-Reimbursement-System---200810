@@ -37,9 +37,9 @@ public class NewTicket extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("entered NewTicket()");
+		//System.out.println("entered NewTicket()");
 		String jsonString = request.getReader().readLine();
-		System.out.println(jsonString);
+		//System.out.println(jsonString);
 		ObjectMapper om = new ObjectMapper();
 		Ticket t = om.readValue(jsonString, Ticket.class);
 		

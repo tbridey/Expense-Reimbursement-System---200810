@@ -9,7 +9,7 @@ async function new_ticket(){
 	
 	var a = document.getElementById('amountInput').value
 	var d = document.getElementById('descriptionInput').value
-	var r = document.getElementById('recieptAttachment').value
+	//var r = document.getElementById('recieptAttachment').value
 	var t = document.getElementById('type').value
 	var tID;
 	if(t=='Lodging'){
@@ -30,8 +30,9 @@ async function new_ticket(){
 		amount : a,
 		submitted : now.getDate(),
 		description : d,
-		reciept : r,
-		author : userObj.firstName,
+		//reciept : r,
+		author : userObj.userID,
+		resolver:-1,
 		statusID : 0,
 		typeID : tID
 	};
