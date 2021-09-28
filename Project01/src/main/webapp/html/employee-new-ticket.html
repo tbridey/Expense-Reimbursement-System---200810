@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="stylesheets/employee-new.css" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="../javascript/employee-new-ticket.js"></script>
+    </head>
+    <body class="text-center">
+      <header class="">
+          <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+              <div class="container-fluid">
+                  <a class="navbar-brand" href="#"><img src="../media/logo.PNG" alt="logo" height="200"></a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID"
+                      aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </div>
+                  <div class="collapse navbar-collapse justify-content-center" id="navbarID">
+                      <div class="">
+                        <h1 class="display-5 text-white">Employee Reimbursment Portal</h1>
+                      </div>
+                  </div>
+              </div>
+          </nav>
+        </header>
+        <div class="custom-div">
+            <form action="">
+                <div class="row justify-content-center align-items-center mt-4">
+                    <label for="amountInput" class="col-sm-2 text-end">Amount spent</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" name="amountInput" id="amountInput" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center mt-4">
+                    <label for="descriptionInput" class="col-sm-2 text-end">Brief Description</label>
+                    <div class="col-sm-3">
+                        <textarea class="form-control" name="descriptionInput" id="descriptionInput" placeholder="write dexcription here.."></textarea>
+                    </div> 
+                </div>
+                <div class="row justify-content-center align-items-center mt-4">
+                    <label for="recieptAttachment" class="col-sm-2 text-end">reciept</label>
+                    <div class="col-sm-3 ">
+                        <input type="file" class="form-control" name="recieptAttachment" id="recieptAttachment" accept=".png, .jpg, .pdf">
+                    </div> 
+                </div>
+                <div class="row justify-content-center align-items-center mt-4">
+                    <label for="type" class="col-sm-2 text-end">Choose the reimbursemnt type:</label>
+                    <div class="col-sm-3">
+                        <input list="types" class="form-control" id="type" name="type" />
+                        <datalist id="types">
+                            <option value="Lodging">
+                            <option value="Travel">
+                            <option value="Food">
+                            <option value="Other">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary ps-5 pe-5 mt-5" onclick="new_ticket()">Submit</button>
+                  </div>
+            </form>
+            <a href="../HTML/employee-home.html">back to home</a>
+        </div>
+    </body>
+    </html>

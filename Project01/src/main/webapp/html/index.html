@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesdeet" href="Project01\src\main\webapp\stylesheets/index-stylesheet.css" type="text/css"> 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="../javascript/index.js"></script>
+    </head>
+    <body class="text-center">
+      <header class="">
+          <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+              <div class="container-fluid">
+                  <!--  <a class="navbar-brand" href="#"><img src= alt="logo" height="200"></a> -->
+                  <div class="collapse navbar-collapse justify-content-center" id="navbarID">
+                      <div class="">
+                        <h1 class="display-5 text-white">Employee Reimbursment Portal</h1>
+                      </div>
+                  </div>
+              </div>
+          </nav>
+        </header>
+        <div class="custom-div container">
+            <form class="" action="">
+                <div class="row justify-content-center align-items-center">
+                  <label for="inputUsername" class="col-lg-2 text-end">Username</label>
+                  <div class="col-lg-6">
+                    <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Username">
+                  </div>
+                </div>
+                <div class="row justify-content-center mt-5">
+                    <label for="inputPassword" class="col-lg-2 text-end">Password</label>
+                    <div class="col-lg-6">
+                      <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-5">
+                  <div class="text-center">
+                    <button type="button" class="btn btn-primary ps-5 pe-5" onclick="verify_login()">Sign in</button>
+                  </div>
+                </div>
+              </form>
+        </div>
+        <a href="../HTML/employee-home.html" class="text-center">employee home</a>
+        <a href="../HTML/manager-home.html" class="text-center">manager home</a>
+        <footer></footer>
+    </body>
+</html>
