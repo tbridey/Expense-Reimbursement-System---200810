@@ -3,10 +3,13 @@ package project01;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.Random;
 
 public class Ticket implements Serializable{
 
-	private int ticketID;
+	Random ran = new Random();
+	
+	private int ticketID=ran.nextInt(10000);
 	private double amount;
 	private Date submitted;
 	private Date resolved;

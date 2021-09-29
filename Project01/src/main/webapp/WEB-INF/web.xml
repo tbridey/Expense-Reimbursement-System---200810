@@ -29,4 +29,14 @@
     <servlet-name>NewTicket</servlet-name>
     <url-pattern>/NewTicket</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewUserPending</display-name>
+    <servlet-name>ViewUserPending</servlet-name>
+    <servlet-class>project01.ViewUserPending</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewUserPending</servlet-name>
+    <url-pattern>/ViewUserPending</url-pattern>
+  </servlet-mapping>
 </web-app>

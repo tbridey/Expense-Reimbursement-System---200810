@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
 
 public class UserOracleDAO implements UserDAO {
 
@@ -134,6 +136,47 @@ public class UserOracleDAO implements UserDAO {
 			System.out.println("ERROR: insert ticket SQL exception");
 			e.printStackTrace();
 			return false;
+		}
+	}
+
+	@Override
+	public HashMap<String, HashMap<String, String>> viewUserPending(int userID) {
+		final String query = 
+				"SELECT er.reimb_id, er.reimb_submitted, ert.REIMB_TYPE, er.reimb_amount, er.reimb_description "
+				+ "FROM ERS_REIMBURSEMENT er "
+				+ "JOIN ERS_REIMBURSEMENT_TYPE ert "
+				+ "	ON er.REIMB_TYPE_ID = ert.REIMB_TYPE_ID "
+				+"WHERE er.REIMB_AUTHOR = ?";
+		try {
+			
+			HashMap<String, HashMap<String, String>> tickets= new HashMap<String, HashMap<String,String>>();
+			
+			HashMap<String,String> ticketItem = new HashMap<String, String>();
+			
+			Connection conn = DatabaseConnector.connector();
+			
+			PreparedStatement prepStmt = conn.prepareStatement(query);
+			prepStmt.setInt(1, userID);
+			
+			ResultSet rs = prepStmt.executeQuery();
+										 
+			int i=1;
+			while(rs.next()) {
+				
+				ticketItem.put("ticketID", Integer.toString(rs.getInt(1)));
+				ticketItem.put("submitted", rs.getDate(2).toString());
+				ticketItem.put("type", rs.getString(3));
+				ticketItem.put("amount",Double.toString(rs.getDouble(4)));
+				ticketItem.put("description", rs.getString(5));
+				tickets.put("ticket"+i, ticketItem);
+				i++;
+			}
+			return tickets;
+			
+		}catch(SQLException e){
+			System.out.println("ERROR: view user pending SQL exception");
+			e.printStackTrace();
+			return null;
 		}
 	}
 

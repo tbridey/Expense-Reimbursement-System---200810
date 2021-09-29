@@ -4,7 +4,6 @@ async function new_ticket(){
 	var session = sessionStorage;
 	var userStr = session.getItem('currentUser');
 	var userObj = JSON.parse(userStr);
-	var x = Math.floor((Math.random() * 100) + 1);
 	var now = new Date();
 	
 	var a = document.getElementById('amountInput').value
@@ -26,7 +25,7 @@ async function new_ticket(){
 	}
 	
 	let newTicket = {
-		ticketID : x,
+	
 		amount : a,
 		submitted : now.getDate(),
 		description : d,
@@ -46,6 +45,16 @@ async function new_ticket(){
 		body: JSON.stringify(newTicket)
 	})
 	.then(res => res.json())
+	.then(data => {
+		if(data==true){
+			alert("Ticket submition succeeded");
+			window.location.replace("http://localhost:8085/Project01/html/employee-home.html");
+		}
+		else{
+			alert("Ticket submition failed");
+			window.location.replace("http://localhost:8085/Project01/html/employee-home.html");
+		}
+	})
 	.catch(error => console.log('ERROR'));	
 };
 

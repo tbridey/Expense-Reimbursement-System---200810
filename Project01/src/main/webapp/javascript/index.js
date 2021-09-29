@@ -8,7 +8,7 @@ let userObj = {
 	roleID:-1,
 };
 
-let verify_login = async function(){
+async function verify_login(){
 	
 	var u = document.getElementById('inputUsername').value;
 	var p = document.getElementById('inputPassword').value;
