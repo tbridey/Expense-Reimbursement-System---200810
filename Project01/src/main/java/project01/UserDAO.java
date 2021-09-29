@@ -8,5 +8,5 @@ public interface UserDAO {
 	int userPage(String username);
 	User getUserObj(User user);
 	boolean insertTicket(Ticket ticket);
-	HashMap<String, HashMap<String, String>> viewUserPending(int userID);
+	HashMap<String, TicketItems> viewUserPending(int userID);
 }

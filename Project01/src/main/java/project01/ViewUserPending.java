@@ -42,7 +42,7 @@ public class ViewUserPending extends HttpServlet {
 		if(session != null) {
 			int userID = (int) session.getAttribute("userID");
 			UserOracleDAO dao = new UserOracleDAO();
-			HashMap<String, HashMap<String, String>> tickets = dao.viewUserPending(userID);
+			HashMap<String, TicketItems> tickets = dao.viewUserPending(userID);
 			String jsonStr = om.writeValueAsString(tickets);
 			//System.out.println(jsonStr);
 			response.getWriter().append(jsonStr);

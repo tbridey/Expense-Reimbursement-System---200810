@@ -140,7 +140,7 @@ public class UserOracleDAO implements UserDAO {
 	}
 
 	@Override
-	public HashMap<String, HashMap<String, String>> viewUserPending(int userID) {
+	public HashMap<String, TicketItems> viewUserPending(int userID) {
 		final String query = 
 				"SELECT er.reimb_id, er.reimb_submitted, ert.REIMB_TYPE, er.reimb_amount, er.reimb_description "
 				+ "FROM ERS_REIMBURSEMENT er "
@@ -149,9 +149,7 @@ public class UserOracleDAO implements UserDAO {
 				+"WHERE er.REIMB_AUTHOR = ?";
 		try {
 			
-			HashMap<String, HashMap<String, String>> tickets= new HashMap<String, HashMap<String,String>>();
-			
-			HashMap<String,String> ticketItem = new HashMap<String, String>();
+			HashMap<String, TicketItems> tickets= new HashMap<String, TicketItems>();
 			
 			Connection conn = DatabaseConnector.connector();
 			
@@ -163,13 +161,17 @@ public class UserOracleDAO implements UserDAO {
 			int i=1;
 			while(rs.next()) {
 				
-				ticketItem.put("ticketID", Integer.toString(rs.getInt(1)));
-				ticketItem.put("submitted", rs.getDate(2).toString());
-				ticketItem.put("type", rs.getString(3));
-				ticketItem.put("amount",Double.toString(rs.getDouble(4)));
-				ticketItem.put("description", rs.getString(5));
+				String id = Integer.toString(rs.getInt(1));
+				String sub = (rs.getDate(2).toString());
+				String type = rs.getString(3);
+				String am = Double.toString(rs.getDouble(4));
+				String des = rs.getString(5);
+				
+				TicketItems ticketItem = new TicketItems(id, sub, type, am, des);
+				
 				tickets.put("ticket"+i, ticketItem);
 				i++;
+				System.out.println(tickets);
 			}
 			return tickets;
 			
