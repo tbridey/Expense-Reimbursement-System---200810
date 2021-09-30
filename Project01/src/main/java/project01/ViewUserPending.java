@@ -1,6 +1,7 @@
 package project01;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -45,7 +46,8 @@ public class ViewUserPending extends HttpServlet {
 			HashMap<String, TicketItems> tickets = dao.viewUserPending(userID);
 			String jsonStr = om.writeValueAsString(tickets);
 			//System.out.println(jsonStr);
-			response.getWriter().append(jsonStr);
+			PrintWriter out = response.getWriter();
+			out.append(jsonStr);
 			
 			
 		}else {

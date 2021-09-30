@@ -171,7 +171,7 @@ public class UserOracleDAO implements UserDAO {
 				
 				tickets.put("ticket"+i, ticketItem);
 				i++;
-				System.out.println(tickets);
+				//System.out.println(tickets);
 			}
 			return tickets;
 			
