@@ -13,15 +13,15 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class ViewUserPending
+ * Servlet implementation class ViewAllPending
  */
-public class ViewUserPending extends HttpServlet {
+public class ViewAllPending extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewUserPending() {
+    public ViewAllPending() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,16 +39,21 @@ public class ViewUserPending extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		
+		//String jsonString = request.getReader().readLine();
+		
 		ObjectMapper om = new ObjectMapper();
+		//System.out.println(stat.getStatus());
+		
 		if(session != null) {
 			int userID = (int) session.getAttribute("userID");
 			UserOracleDAO dao = new UserOracleDAO();
-			HashMap<String, TicketItems> tickets = dao.viewUserPending(userID);
+			
+			HashMap<String, TicketItems> tickets = dao.viewAllPending();
 			String jsonStr = om.writeValueAsString(tickets);
 			//System.out.println(jsonStr);
 			PrintWriter out = response.getWriter();
 			out.append(jsonStr);
-			
 			
 		}else {
 			System.out.println("Session returned empty");

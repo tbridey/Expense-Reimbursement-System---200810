@@ -100,7 +100,7 @@ public class UserOracleDAO implements UserDAO {
 			int uID=rs.getInt("ers_users_id");
 			int rID=rs.getInt("user_role_id");
 			
-			User userObj=new User(uName,pass,fName,lName,email,uID,rID);
+			User userObj=new User(uName,pass,fName,lName,email,uID,rID,null);
 			
 			return userObj;
 			
@@ -140,13 +140,16 @@ public class UserOracleDAO implements UserDAO {
 	}
 
 	@Override
-	public HashMap<String, TicketItems> viewUserPending(int userID) {
+	public HashMap<String, TicketItems> userPendingOrApproved(int userID, int status) {
 		final String query = 
-				"SELECT er.reimb_id, er.reimb_submitted, ert.REIMB_TYPE, er.reimb_amount, er.reimb_description "
-				+ "FROM ERS_REIMBURSEMENT er "
-				+ "JOIN ERS_REIMBURSEMENT_TYPE ert "
-				+ "	ON er.REIMB_TYPE_ID = ert.REIMB_TYPE_ID "
-				+"WHERE er.REIMB_AUTHOR = ?";
+				"SELECT er.reimb_id, eu.user_first_name, er.reimb_submitted, er.reimb_resolved, ert.REIMB_TYPE, er.reimb_amount, er.reimb_description "
+				+"FROM ERS_REIMBURSEMENT er "
+				+"JOIN ERS_REIMBURSEMENT_TYPE ert "
+				+"ON er.REIMB_TYPE_ID = ert.REIMB_TYPE_ID "
+				+"JOIN ERS_USERS eu "
+				+"ON er.REIMB_RESOLVER = eu.ERS_USERS_ID "
+				+"WHERE er.REIMB_AUTHOR = ? "
+				+"AND er.REIMB_STATUS_ID = ?";
 		try {
 			
 			HashMap<String, TicketItems> tickets= new HashMap<String, TicketItems>();
@@ -155,6 +158,7 @@ public class UserOracleDAO implements UserDAO {
 			
 			PreparedStatement prepStmt = conn.prepareStatement(query);
 			prepStmt.setInt(1, userID);
+			prepStmt.setInt(2, status);
 			
 			ResultSet rs = prepStmt.executeQuery();
 										 
@@ -162,12 +166,23 @@ public class UserOracleDAO implements UserDAO {
 			while(rs.next()) {
 				
 				String id = Integer.toString(rs.getInt(1));
-				String sub = (rs.getDate(2).toString());
-				String type = rs.getString(3);
-				String am = Double.toString(rs.getDouble(4));
-				String des = rs.getString(5);
+				String rev = rs.getString(2);
+				String sub = (rs.getDate(3).toString());
+				String res;
+				rs.getDate(4);
+				if(rs.wasNull()) {
+					res = "";
+					//System.out.println("if: "+res);
+				}
+				else {
+					res = rs.getDate(4).toString();
+					//System.out.println("else: "+res);
+				}
+				String type = rs.getString(5);
+				String am = Double.toString(rs.getDouble(6));
+				String des = rs.getString(7);
 				
-				TicketItems ticketItem = new TicketItems(id, sub, type, am, des);
+				TicketItems ticketItem = new TicketItems(null, id, rev, sub, res, type, am, des);
 				
 				tickets.put("ticket"+i, ticketItem);
 				i++;
@@ -182,4 +197,171 @@ public class UserOracleDAO implements UserDAO {
 		}
 	}
 
+	@Override
+	public User searchEmployee(int emp_num) {
+		final String query="SELECT eu.USER_FIRST_NAME, eu.USER_LAST_NAME, eu.ERS_USERNAME, eu.USER_EMAIL, eur.USER_ROLE, eu.ERS_USERS_ID "
+		+"FROM ERS_USERS eu "
+		+"JOIN ERS_USER_ROLES eur " 
+		+"ON eu.USER_ROLE_ID = eur.ERS_USER_ROLE_ID "
+		+"WHERE eu.ERS_USERS_ID = ?";
+		
+		try {
+			Connection conn = DatabaseConnector.connector();
+			
+			PreparedStatement prepStmt = conn.prepareStatement(query);
+			prepStmt.setInt(1, emp_num);
+			
+			ResultSet rs = prepStmt.executeQuery();
+			rs.next();
+			
+			String fName=rs.getString("user_first_name");
+			String lName=rs.getString("user_last_name");
+			String uName=rs.getString("ers_username");
+			String email=rs.getString("user_email");
+			String role=rs.getString("user_role");
+			int uID=rs.getInt("ers_users_id");
+			
+			User userObj=new User(uName,null,fName,lName,email,uID,0,role);
+			
+			return userObj;
+			
+		}catch(SQLException e){
+			System.out.println("ERROR: search employee SQL exception");
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	@Override
+	public HashMap<String, TicketItems> viewAllPending() {
+		final String query = 
+				"SELECT eu.USER_LAST_NAME , er. REIMB_ID , er.REIMB_SUBMITTED , ert.REIMB_TYPE , er.REIMB_AMOUNT , er.REIMB_DESCRIPTION "
+				+ "FROM ERS_REIMBURSEMENT er "
+				+ "JOIN ERS_REIMBURSEMENT_TYPE ert "
+				+ "ON er.REIMB_TYPE_ID = ert.REIMB_TYPE_ID "
+				+ "JOIN ERS_USERS eu "
+				+ "ON er.REIMB_AUTHOR = eu.ERS_USERS_ID "
+				+ "WHERE er.REIMB_STATUS_ID = ?";
+		try {
+			
+			HashMap<String, TicketItems> tickets= new HashMap<String, TicketItems>();
+			
+			Connection conn = DatabaseConnector.connector();
+			
+			PreparedStatement prepStmt = conn.prepareStatement(query);
+			prepStmt.setInt(1, 0);
+			
+			ResultSet rs = prepStmt.executeQuery();
+										 
+			int i=1;
+			while(rs.next()) {
+				
+				String ln = rs.getString(1);
+				String id = Integer.toString(rs.getInt(2));
+				String sub = (rs.getDate(3).toString());
+				String type = rs.getString(4);
+				String am = Double.toString(rs.getDouble(5));
+				String des = rs.getString(6);
+				
+				TicketItems ticketItem = new TicketItems(ln, id, null, sub, null, type, am, des);
+				
+				tickets.put("ticket"+i, ticketItem);
+				i++;
+				//System.out.println(tickets);
+			}
+			return tickets;
+			
+		}catch(SQLException e){
+			System.out.println("ERROR: view user pending SQL exception");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean updateTicketStatus(int ticketID, String status) {
+		final String query = "update ERS_REIMBURSEMENT set REIMB_STATUS_ID=? where REIMB_ID=?";
+		int statusID=0;
+		
+		switch(status) {
+		case "approved": statusID = 1;
+		break;
+		case "denied": statusID = 2;
+		break;
+		}
+		
+		try {
+			Connection conn = DatabaseConnector.connector();
+			
+			PreparedStatement prepStmt=conn.prepareStatement(query);
+			
+			prepStmt.setInt(1,statusID);
+			prepStmt.setInt(2,ticketID);
+			
+			prepStmt.executeUpdate();
+			
+			return true;
+			
+		}catch(SQLException e){
+			System.out.println("ERROR: update ticket stat SQL exception");
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public HashMap<String, TicketItems> viewAll() {
+		final String query = 
+				" SELECT er.REIMB_ID, eu.USER_LAST_NAME, er.REIMB_RESOLVER, er.REIMB_SUBMITTED, er.REIMB_RESOLVED , ert.REIMB_TYPE, er.REIMB_AMOUNT, er.REIMB_DESCRIPTION "
+				+ "FROM ERS_REIMBURSEMENT er "
+				+ "JOIN ERS_REIMBURSEMENT_TYPE ert "
+				+ "ON er.REIMB_TYPE_ID = ert.REIMB_TYPE_ID "
+				+ "JOIN ERS_USERS eu "
+				+ "ON er.REIMB_AUTHOR = eu.ERS_USERS_ID ";
+		try {
+			
+			HashMap<String, TicketItems> tickets= new HashMap<String, TicketItems>();
+			
+			Connection conn = DatabaseConnector.connector();
+			
+			PreparedStatement prepStmt = conn.prepareStatement(query);
+			
+			ResultSet rs = prepStmt.executeQuery();
+										 
+			int i=1;
+			while(rs.next()) {
+				
+				String id = Integer.toString(rs.getInt(1));
+				String ln = rs.getString(2);
+				String rev = Integer.toString(rs.getInt(3));
+				String sub = (rs.getDate(4).toString());
+				String res;
+				rs.getDate(5);
+				if(rs.wasNull()) {
+					res = "";
+					//System.out.println("if: "+res);
+				}
+				else {
+					res = rs.getDate(5).toString();
+					//System.out.println("else: "+res);
+				}
+				String type = rs.getString(6);
+				String am = Double.toString(rs.getDouble(7));
+				String des = rs.getString(8);
+				
+				TicketItems ticketItem = new TicketItems(ln, id, rev, sub, res, type, am, des);
+				
+				tickets.put("ticket"+i, ticketItem);
+				i++;
+				//System.out.println(tickets);
+			}
+			return tickets;
+			
+		}catch(SQLException e){
+			System.out.println("ERROR: view user pending SQL exception");
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

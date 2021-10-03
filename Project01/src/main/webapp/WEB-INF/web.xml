@@ -31,12 +31,52 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ViewUserPending</display-name>
-    <servlet-name>ViewUserPending</servlet-name>
-    <servlet-class>project01.ViewUserPending</servlet-class>
+    <display-name>ViewUserPendingOrApproved</display-name>
+    <servlet-name>ViewUserPendingOrApproved</servlet-name>
+    <servlet-class>project01.ViewUserPendingOrApproved</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ViewUserPending</servlet-name>
-    <url-pattern>/ViewUserPending</url-pattern>
+    <servlet-name>ViewUserPendingOrApproved</servlet-name>
+    <url-pattern>/ViewUserPendingOrApproved</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchEmployee</display-name>
+    <servlet-name>SearchEmployee</servlet-name>
+    <servlet-class>project01.SearchEmployee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchEmployee</servlet-name>
+    <url-pattern>/SearchEmployee</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewAllPending</display-name>
+    <servlet-name>ViewAllPending</servlet-name>
+    <servlet-class>project01.ViewAllPending</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewAllPending</servlet-name>
+    <url-pattern>/ViewAllPending</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveOrDenyTicket</display-name>
+    <servlet-name>ApproveOrDenyTicket</servlet-name>
+    <servlet-class>project01.ApproveOrDenyTicket</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveOrDenyTicket</servlet-name>
+    <url-pattern>/ApproveOrDenyTicket</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewAllTickets</display-name>
+    <servlet-name>ViewAllTickets</servlet-name>
+    <servlet-class>project01.ViewAllTickets</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewAllTickets</servlet-name>
+    <url-pattern>/ViewAllTickets</url-pattern>
   </servlet-mapping>
 </web-app>

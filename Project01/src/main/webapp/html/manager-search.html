@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="stylesheets/employee-pending-resolved.css" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="../javascript/manager-search.js"></script>
+    </head>
+    <body class="text-center">
+      <header class="">
+       <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#"><img src="../media/logo.PNG" alt="logo" height="200"></a>
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarID">
+                        <div class="">
+                          <h1 class="navbar-brand h1">Employee Reimbursment Portal</h1>
+                        </div>
+                        <div class="d-flex">
+                        	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle text-light" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+							</svg>
+					</div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="text-center justify-content-center">
+            <div class="title-div">
+                <h1 class="">Employee Information</h1>
+            </div>
+            <div class="mt-4 mb-4">
+                <form action="">
+                    <input type="number" id="emp-num" name="emp-num" placeholder="Employee ID">
+                    <button type="button" class="btn btn-primary" onclick="search()">Find</button>
+                </form>
+            </div>
+            <!-- employee info will only be generated on a complete server request-->
+            <div id="employee-info" class="text-center justify-content-center">
+            <h3 id="employee-name">Firstname Lastname</h3>
+            	<table class="table">
+            	
+            		<tr>
+                		<td class="text-end"><h4 id="row1">Username: </h4></td>
+                		<td class="text-start"><h4 id="employee-username">username </h4></td>
+                	</tr>
+                	<tr>
+                		<td class="text-end"><h4 id="row2">Email: </h4></td>
+                		<td class="text-start"><h4 id="employee-email">email@here </h4></td>
+                	</tr>
+                	<tr>
+                		<td class="text-end"><h4 id="row3">Job Title: </h4></td>
+                		<td class="text-start"><h4 id="employee-title">Emp/Man </h4></td>
+                	</tr>
+                	<tr>
+                		<td class="text-end"><h4 id="row4">Employee ID: </h4></td>
+                		<td class="text-start"><h4 id="employee-id">0000 </h4></td>
+                	</tr>
+                </table>
+            </div>
+            <!--table will display all tickets associated with the employee
+            <div class="table-div">
+                <table id="ticket-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">REIMB ID</th>
+                            <th scope="col">Submit Date</th>
+                            <th scope="col">Resolve Date</th>
+                            <th scope="col">REIMB Type</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">123</td>
+                            <td>**/**/****</td>
+                            <td>**/**/****</td>
+                            <td>FOOD/LODGING/TRAVEL/OTHER</td>
+                            <td>00.00</td>
+                            <td>description here</td>
+                            <td>APP/DENIED/PENDING</td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <a href="../HTML/manager-home.html">back to home</a>
+            </div>-->
+        </div>

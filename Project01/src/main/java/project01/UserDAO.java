@@ -8,5 +8,10 @@ public interface UserDAO {
 	int userPage(String username);
 	User getUserObj(User user);
 	boolean insertTicket(Ticket ticket);
-	HashMap<String, TicketItems> viewUserPending(int userID);
+	HashMap<String, TicketItems> userPendingOrApproved(int userID, int status);
+	User searchEmployee(int emp_num);
+	HashMap<String, TicketItems> viewAllPending();
+	boolean updateTicketStatus(int ticketID, String status);
+	HashMap<String, TicketItems> viewAll();
+	
 }

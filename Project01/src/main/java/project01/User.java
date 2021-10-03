@@ -1,5 +1,7 @@
 package project01;
 
+import java.util.HashMap;
+
 public class User {
 
 	private String username;
@@ -9,10 +11,11 @@ public class User {
 	private String email;
 	private int userID;
 	private int roleID;
+	private String userRole;
 	
 	public User() {}
 	
-	public User(String username, String password, String firstName, String lastName, String email, int userID, int role) {
+	public User(String username, String password, String firstName, String lastName, String email, int userID, int role, String userRole) {
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setFirstName(firstName);
@@ -20,6 +23,7 @@ public class User {
 		this.setEmail(email);
 		this.setUserID(userID);
 		this.setRoleID(role);
+		this.setUserRole(userRole);
 	}
 	
 	public String getUsername() {
@@ -75,6 +79,14 @@ public class User {
 
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 	
 }
