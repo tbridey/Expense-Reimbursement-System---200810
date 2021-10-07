@@ -1,30 +1,34 @@
-# project01
+# Expense-Reimbursement-System---200810
 revature project01 reimbursment platform
 PROJECT NAME
 Project Description
-Here goes your awesome project description!
+A web application to handle reimbursement of employee expenditures that are covered by the employer. Managers can view all tickets, search under employees, and approve or deny any pending reimbursement tickets, while employees can view all their own pending, and approved tickets, and create new ones. All data is persisted by a database.
 
 Technologies Used
-Tech 1 - version 1.0
-Tech 2 - version 2.0
-Tech 3 - version 3.0
+Servlets, Java, JavaScript, HTML, CSS, JDBC, SQL, AJAX, Bootstrap, RDS, Tomcat, Git, Maven
 Features
-List of features ready and TODOs for future development
 
-Awesome feature 1
-Awesome feature 2
-Awesome feature 3
+Employee Features
+Login
+Logout
+View the employee home page
+Submit a reimbursement request
+View pending reimbursement requests
+View resolved reimbursement requests
+View my account information
+
+Manager Features
+Login
+Logout
+View the manager home page
+Approve/Deny pending reimbursement requests
+View all pending requests of all employees
+View all resolved requests of all employees
+View details of a specific employee
+
 To-do list:
+add view all employees functionality
+add display user name on the homepage
+add specific employee tickets
+add ticket ID search
 
-Wow improvement to be done 1
-Wow improvement to be done 2
-Getting Started
-(include git clone command) (include all environment setup steps)
-
-Be sure to include BOTH Windows and Unix command
-Be sure to mention if the commands only work on a specific platform (eg. AWS, GCP)
-
-All the code required to get started
-Images of what it should look like
-Usage
-Here, you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
